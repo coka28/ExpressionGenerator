@@ -15,6 +15,7 @@ def make_expr(difficulty=5):
             lambda a,b : '%s %s %s'%(a,'%',b),
             lambda a,b : '%s and %s'%(a,b),
             lambda a,b : '%s or %s'%(a,b),
+            lambda a : '-%s'%a,
             lambda a : '(not %s)'%a,
             lambda a : 'bool(%s)'%a,
             lambda a : 'int(%s)'%a,
@@ -40,11 +41,15 @@ def make_expr(difficulty=5):
         if i>0 and isinstance(expr[i-1],str):
             a = expr[i-1]
             delete.append(i-1)
-        else: a = rint(0,10)
+        else:
+            a = rint(0,10)
+            if rnd()>0.8: a += round(rnd(),1)
         if args>1 and i<len(expr)-1 and isinstance(expr[i+1],str):
             b = expr[i+1]
             delete.append(i+1)
-        else: b = rint(0,10)
+        else:
+            b = rint(0,10)
+            if rnd()>0.8: b += round(rnd(),1)
 
         expr[i] = f(*(a,b)[:f.__code__.co_argcount])
         for k in delete[::-1]:
@@ -61,7 +66,9 @@ def testme(questions=10,incr=1):
         print('%s. Frage:'%(q+1))
         print(questions[q])
         answer = input('What does it evaluate to?\n').replace(' ','').replace('\t','').replace('\n','')
-        correct_answer = str(eval(questions[q]))
+        try: correct_answer = str(eval(questions[q]))
+        except Exception as e:
+            correct_answer = str(e)
         if correct_answer == answer:
             print('RICHTIG')
             correct += 1
