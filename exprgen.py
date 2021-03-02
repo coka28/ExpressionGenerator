@@ -61,12 +61,12 @@ def make_expr(difficulty=5):
 def testme(questions=10,incr=1):
     questions_ = [make_expr(i) for i in range(incr,questions*incr+1,incr)]
     correct = 0
-    for q in range(len(questions)):
+    for q in range(len(questions_)):
         print()
         print('%s. Frage:'%(q+1))
         print(questions_[q])
-        answer = input('What does it evaluate to?\n').replace(' ','').replace('\t','').replace('\n','')
-        try: correct_answer = str(eval(_questions[q]))
+        answer = input('What does it evaluate to?\n').replace(' ','').replace('\t','')
+        try: correct_answer = str(eval(questions_[q]))
         except Exception as e:
             correct_answer = str(e)
         if correct_answer == answer:
