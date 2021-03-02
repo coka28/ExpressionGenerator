@@ -31,9 +31,8 @@ def make_expr(difficulty=5):
     def add():
         global x,y
         x -= rnd()
-        if rnd()<1/difficulty or x<0:
-            if y>0: return rint(0,9) + (round(rnd(),1) if rnd()<0.1 else 0)
-            else: pass
+        if (rnd()<1/difficulty or x<0) and y>0:
+            return rint(0,9) + (round(rnd(),1) if rnd()<0.1 else 0)
         y += 1
 
         f = wrap()
