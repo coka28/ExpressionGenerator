@@ -59,14 +59,14 @@ def make_expr(difficulty=5):
 
 
 def testme(questions=10,incr=1):
-    questions = [make_expr(i) for i in range(incr,questions*incr+1,incr)]
+    questions_ = [make_expr(i) for i in range(incr,questions*incr+1,incr)]
     correct = 0
     for q in range(len(questions)):
         print()
         print('%s. Frage:'%(q+1))
-        print(questions[q])
+        print(questions_[q])
         answer = input('What does it evaluate to?\n').replace(' ','').replace('\t','').replace('\n','')
-        try: correct_answer = str(eval(questions[q]))
+        try: correct_answer = str(eval(_questions[q]))
         except Exception as e:
             correct_answer = str(e)
         if correct_answer == answer:
@@ -77,4 +77,4 @@ def testme(questions=10,incr=1):
             print('RICHTIG GEWESEN WÄRE : %s'%correct_answer)
 
     print()
-    print('%s / 10 Punkte'%correct)
+    print('%s / %s Punkte'%(correct,questions))
