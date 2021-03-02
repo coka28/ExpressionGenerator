@@ -36,7 +36,6 @@ def make_expr(difficulty=5):
         i = rint(0,len(expr)-1)
         a,b = None,None
         f = wrap()
-        args = f.__code__.co_argcount
         delete = []
         if i>0 and isinstance(expr[i-1],str):
             a = expr[i-1]
